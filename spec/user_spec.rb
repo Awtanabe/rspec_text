@@ -3,6 +3,13 @@ require 'spec_helper'
 
 
 RSpec.describe User do
+
+  shared_examples 'aaaa' do
+    it {is_expected.to eq '僕はakiです' }   
+  end
+  shared_examples 'bbb' do
+    it {is_expected.to eq 'ぼくはakiだよ' }   
+  end
   shared_context '13の時' do
     let(:age){ 13 }   
   end
@@ -12,12 +19,12 @@ RSpec.describe User do
   context '' do
     include_context '13の時'
     subject {User.new('aki',age).greet}
-    it {is_expected.to eq '僕はakiです' }      
+    it_behaves_like 'aaaa'      
   end
 
   context '' do
     include_context '12の時'
     subject {User.new('aki',age).greet}
-    it {is_expected.to eq 'ぼくはakiだよ'}
+    it_behaves_like 'bbb'
   end
 end
